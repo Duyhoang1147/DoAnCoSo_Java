@@ -16,13 +16,13 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "categories")
 public class Category {
     @Id
-    String Id;
+    private String Id;
 
     @NotBlank(message = "Không thể bỏ trồng tên")
     @Length(min = 3, max = 100, message = "tên chỉ được dài từ 3 đến 100 ký tự")
-    String Name;
+    private String Name;
 
     @OneToMany
     @JoinColumn(name = "suppler_id")
-    Supplier supplier;
+    private Supplier supplier;
 }

@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.query.Order;
 import org.hibernate.validator.constraints.Length;
 
 @Setter
@@ -18,25 +19,29 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "user")
 public class User {
     @Id
-    String Id;
+    private String Id;
 
     @Length(min = 3, max = 50, message = "Tên sản phẩm phải trong khoảng từ 3 đến 50")
     @NotBlank(message = "Tên không thể bỏ trống")
-    String Name;
-    Boolean Gender;
+    private String Name;
+    private Boolean Gender;
 
     @Max(value = 0)
     @Min(value = 100)
-    int Age;
+    private int Age;
 
     @NotBlank(message = "Địa chỉ không thể bỏ trống")
     @Length(min = 3, max = 100, message = "Địa chỉ  phải nằm trong khoảng 3 đến 100 ký tự")
-    String Address;
+    private String Address;
 
-    String Phone;
-    Boolean Status;
+    private String Phone;
+    private Boolean Status;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    Role role;
+    private Role role;
+
+    @OneToMany
+    @JoinColumn(name = "orderinvoice_id")
+    private OrderInvoice orderinvoice;
 }

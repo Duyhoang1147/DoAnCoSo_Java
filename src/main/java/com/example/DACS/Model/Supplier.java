@@ -3,6 +3,7 @@ package com.example.DACS.Model;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
@@ -22,5 +23,9 @@ public class Supplier {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    Category category;
+    public Category category;
+
+    @OneToMany
+    @JoinColumn(name = "deliveryinvoice_id")
+    public DeliveryInvoice deliveryinvoice;
 }

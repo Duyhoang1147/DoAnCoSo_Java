@@ -18,11 +18,11 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "roles")
 public class Role {
     @Id
-    String Id;
+    private String Id;
 
     @Length(min = 3, max = 50, message = "Tên sản phẩm phải trong khoảng từ 3 đến 50")
     @NotBlank(message = "Tên không thể bỏ trống")
-    String Name;
+    private String Name;
 
 
 }

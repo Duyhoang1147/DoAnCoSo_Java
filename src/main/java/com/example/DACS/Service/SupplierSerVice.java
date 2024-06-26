@@ -4,10 +4,12 @@ import com.example.DACS.Model.Product;
 import com.example.DACS.Model.Supplier;
 import com.example.DACS.Repository.ProductRepository;
 import com.example.DACS.Repository.SupplierRepository;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,17 +22,28 @@ public class SupplierSerVice {
     public List<Supplier> getAllSupplier(){
         return supplierRepository.findAll();
     }
-    public void addSupplier(Supplier supplier){
-        supplierRepository.save(supplier);
-    }
+
+    public void addSupplier(Supplier supplier){ supplierRepository.save(supplier); }
+
     public Optional<Supplier> findSupplierById(String id){
         return supplierRepository.findById(id);
     }
 
-    public void modifySupplier(String id, Supplier supplier){
-
+    public void updateSupplier(@NotNull Supplier supplier)
+    {
+        Supplier updateSupplier = supplierRepository.findById(supplier.getId())
+                .orElseThrow(() -> new IllegalStateException("Supplier with " + supplier.getId() + "dose not exist"));
+        updateSupplier.setName(supplier.getName());
+        updateSupplier.setAddress((supplier.getAddress()));
+        updateSupplier.setPhone(supplier.getPhone());
+        updateSupplier.setStatus(supplier.isStatus());
+        supplierRepository.save(updateSupplier);
     }
-    public void deleteSupplier(String id){
 
+    public void deleteSupplier(String id)
+    {
+        if(!supplierRepository.existsById(id))
+            throw new IllegalStateException("Supplier with " + id + "dose not exist");
+        supplierRepository.deleteById(id);
     }
 }

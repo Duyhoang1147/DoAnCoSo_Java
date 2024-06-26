@@ -3,6 +3,7 @@ package com.example.DACS.Service;
 import com.example.DACS.Model.Category;
 import com.example.DACS.Repository.CategoryRepository;
 import com.example.DACS.Repository.ProductRepository;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,27 @@ public class CategoryService {
     {
         categoryRepository.save(category);
     }
+
     public Optional<Category> findCategoryById(String id){
         return categoryRepository.findById(id);
     }
+
     public List<Category> getAllCategories(){
         return categoryRepository.findAll();
     }
 
-    public boolean deleteCategory(String id){
-        return false;
+    public void updateCategory(@NotNull Category category)
+    {
+        Category updateCategory = categoryRepository.findById(category.getId())
+                .orElseThrow(() -> new IllegalStateException("Category with ID " + category.getId() + " does not exist."));
+        updateCategory.setName(category.getName());
+        categoryRepository.save(updateCategory);
     }
-    public void modifyCategory(String id, Category category){
 
+    public void deletecategory(String id)
+    {
+        if(!categoryRepository.existsById(id))
+            throw new IllegalStateException("Category with ID " + id + " does not exist.");
+        categoryRepository.deleteById(id);
     }
 }

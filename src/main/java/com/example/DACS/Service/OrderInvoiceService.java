@@ -13,22 +13,27 @@ import java.util.Optional;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class OrderInvoiceService {
+
     private OrderInvoiceRepository orderInvoiceRepository;
 
-    public List<OrderInvoice> getAllOrderInvoice(){
+    public List<OrderInvoice> getAllOrderInvoice() {
         return orderInvoiceRepository.findAll();
     }
-    public void addOrderInvoice(OrderInvoice orderInvoice){
+
+    public void addOrderInvoice(OrderInvoice orderInvoice) {
         orderInvoiceRepository.save(orderInvoice);
     }
-    public Optional<OrderInvoice> findOrderInvoiceById(String id){
+
+    public Optional<OrderInvoice> findOrderInvoiceById(String id) {
         return orderInvoiceRepository.findById(id);
     }
 
-    public void modifyOrderInvoice(String id, OrderInvoice orderInvoice){
-
+    public void updateOrderInvoice(String id, OrderInvoice orderInvoice) {
     }
-    public void deleteOrderInvoice(String id){
 
+    public void deleteOrderInvoice(String id) {
+        if (!orderInvoiceRepository.existsById(id))
+            throw new IllegalStateException("Invoice with ID " + id + " does not exist.");
+        orderInvoiceRepository.deleteById(id);
     }
 }

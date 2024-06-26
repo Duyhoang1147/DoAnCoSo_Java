@@ -14,22 +14,26 @@ import java.util.Optional;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class DeliveryInvoiceService {
+
     private DeliveryInvoiceRepository deliveryInvoiceRepository;
 
     public List<DeliveryInvoice> getAllDeliveryInvoices(){
         return deliveryInvoiceRepository.findAll();
     }
+
     public void addDeliveryInvoice(DeliveryInvoice deliveryInvoice){
         deliveryInvoiceRepository.save(deliveryInvoice);
     }
+
     public Optional<DeliveryInvoice> findDeliveryInvoiceById(String id){
         return deliveryInvoiceRepository.findById(id);
     }
 
-    public void modifyDeliveryInvoice(String id, DeliveryInvoice deliveryInvoice){
+    public void modifyDeliveryInvoice(String id, DeliveryInvoice deliveryInvoice){}
 
-    }
     public void deleteDeliveryInvoice(String id){
-
+        if(!deliveryInvoiceRepository.existsById(id))
+            throw new IllegalStateException("Invoice with " + id  + "does not exist");
+        deliveryInvoiceRepository.deleteById(id);
     }
 }

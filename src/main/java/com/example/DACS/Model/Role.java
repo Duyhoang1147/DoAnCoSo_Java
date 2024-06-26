@@ -20,17 +20,21 @@ import java.util.Set;
 public class Role implements GrantedAuthority {
     @Id
     private String id;
+
     @NotBlank(message = "Name is required")
     @Column(name = "name", length = 50, nullable = false)
     @Size(max = 50, message = "Name must be less than 50 characters")
     private String name;
+
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<User> users = new HashSet<>();
+
     @Override
     public String getAuthority() {
         return name;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,6 +43,7 @@ public class Role implements GrantedAuthority {
         Role role = (Role) o;
         return getId() != null && Objects.equals(getId(), role.getId());
     }
+
     @Override
     public int hashCode() {
         return getClass().hashCode();

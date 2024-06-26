@@ -36,7 +36,8 @@ public class Product {
 
     @NotBlank(message = "Số lượng không thể bỏ trống")
     private int Quantity;
-    private boolean Accept;
+
+    //private boolean Accept; Khong can thiet nua
     private boolean Status;
 
     @ManyToOne

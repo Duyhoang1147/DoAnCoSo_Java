@@ -24,7 +24,7 @@ public class OrderInvoice {
     @JoinColumn(name = "user_id")
     public User user;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "OrderInvoice_Product",
             joinColumns = @JoinColumn(name = "orderinvoice_id"),

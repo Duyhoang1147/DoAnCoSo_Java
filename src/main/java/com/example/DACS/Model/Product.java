@@ -43,12 +43,12 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToMany(mappedBy = "products_delivery")
+    @ManyToMany(mappedBy = "product")
     private List<DeliveryInvoice> deliveryinvoice;
 
-    @ManyToMany(mappedBy = "products_order")
+    @ManyToMany(mappedBy = "product")
     private List<OrderInvoice> orderInvoice;
 
-    @ManyToMany(mappedBy = "products_supplier")
+    @ManyToMany(mappedBy = "product")
     private List<Supplier> supplier;
 }

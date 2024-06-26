@@ -1,9 +1,6 @@
 package com.example.DACS.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -44,4 +41,13 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     public Category category;
+
+    @ManyToMany(mappedBy = "products_delivery")
+    DeliveryInvoice deliveryinvoice;
+
+    @ManyToMany(mappedBy = "products_order")
+    OrderInvoice orderInvoice;
+
+    @ManyToMany(mappedBy = "products_supplier")
+    Supplier supplier;
 }

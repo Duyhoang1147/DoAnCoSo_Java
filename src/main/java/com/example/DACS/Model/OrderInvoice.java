@@ -1,10 +1,9 @@
 package com.example.DACS.Model;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 public class OrderInvoice {
     private String Id;
@@ -14,8 +13,11 @@ public class OrderInvoice {
     @JoinColumn(name = "user_id")
     public User user;
 
-    @OneToMany
-    @JoinColumn(name = "orderinvoicedetail_id")
-    public OrderInvoiceDetail orderinvoicedetail;
-
+    @ManyToMany
+    @JoinTable(
+            name = "OrderInvoice_Product",
+            joinColumns = @JoinColumn(name = "orderinvoice_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    List<Product> product;
 }

@@ -1,11 +1,10 @@
 package com.example.DACS.Model;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.List;
 
 public class Supplier {
     @Id
@@ -21,11 +20,15 @@ public class Supplier {
     String Phone;
     boolean Status;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    public Category category;
+    @ManyToMany
+    @JoinTable(
+            name = "Supplier_Product",
+            joinColumns = @JoinColumn(name = "supplier_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    List<Product> product;
 
     @OneToMany
     @JoinColumn(name = "deliveryinvoice_id")
-    public DeliveryInvoice deliveryinvoice;
+    public List<DeliveryInvoice> deliveryinvoice;
 }

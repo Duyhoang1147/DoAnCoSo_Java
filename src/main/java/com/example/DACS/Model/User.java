@@ -11,6 +11,8 @@ import lombok.Setter;
 import org.hibernate.query.Order;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @Setter
 @Getter
 @RequiredArgsConstructor
@@ -43,5 +45,5 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "orderinvoice_id")
-    private OrderInvoice orderinvoice;
+    private List<OrderInvoice> orderinvoice;
 }

@@ -18,6 +18,8 @@ import java.util.List;
 public class DeliveryInvoice {
     @Id
     private String Id;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "create_date")
     private Date Create;
 
     @ManyToOne

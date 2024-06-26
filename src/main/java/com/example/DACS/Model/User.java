@@ -21,7 +21,6 @@ import java.util.*;
 @Table(name = "user")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @Column(name = "username", length = 50, unique = true)
     @NotBlank(message = "Username is required")

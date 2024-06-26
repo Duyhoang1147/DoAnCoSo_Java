@@ -23,6 +23,9 @@ public class User {
     @Id
     private String Id;
 
+    @NotBlank(message = "Bắt buộc phải nhập mật khẩu")
+    private String Password;
+
     @Length(min = 3, max = 50, message = "Tên sản phẩm phải trong khoảng từ 3 đến 50")
     @NotBlank(message = "Tên không thể bỏ trống")
     private String Name;

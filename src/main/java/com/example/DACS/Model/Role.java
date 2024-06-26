@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Length;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
     @Id
     private String Id;

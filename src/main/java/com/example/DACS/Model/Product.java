@@ -10,14 +10,15 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class Product {
     @Id
     private String Id;
@@ -40,14 +41,14 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    public Category category;
+    private Category category;
 
     @ManyToMany(mappedBy = "products_delivery")
-    DeliveryInvoice deliveryinvoice;
+    private List<DeliveryInvoice> deliveryinvoice;
 
     @ManyToMany(mappedBy = "products_order")
-    OrderInvoice orderInvoice;
+    private List<OrderInvoice> orderInvoice;
 
     @ManyToMany(mappedBy = "products_supplier")
-    Supplier supplier;
+    private List<Supplier> supplier;
 }

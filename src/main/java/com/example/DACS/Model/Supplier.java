@@ -2,10 +2,20 @@ package com.example.DACS.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "supplier")
 public class Supplier {
     @Id
     String Id;

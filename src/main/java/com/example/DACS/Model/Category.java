@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "categories")
+@Table(name = "category")
 public class Category {
     @Id
     private String Id;

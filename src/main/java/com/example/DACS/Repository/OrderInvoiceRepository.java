@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderInvoiceRepository extends JpaRepository<OrderInvoice, String> {
+    long countByProductId(String productId);
 }

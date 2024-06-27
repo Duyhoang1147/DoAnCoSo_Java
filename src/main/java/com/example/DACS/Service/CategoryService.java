@@ -41,10 +41,11 @@ public class CategoryService {
         categoryRepository.save(updateCategory);
     }
 
-    public void deletecategory(String id)
+    public void deletecategory(@NotNull Category category)
     {
-        if(!categoryRepository.existsById(id))
-            throw new IllegalStateException("Category with ID " + id + " does not exist.");
-        categoryRepository.deleteById(id);
+        Category updateCategory = categoryRepository.findById(category.getId())
+                .orElseThrow(() -> new IllegalStateException("Category with ID " + category.getId() + " does not exist."));
+        updateCategory.setStatus(category.getStatus());
+        categoryRepository.save(updateCategory);
     }
 }

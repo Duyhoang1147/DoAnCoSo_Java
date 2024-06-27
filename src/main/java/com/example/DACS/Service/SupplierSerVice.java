@@ -1,5 +1,6 @@
 package com.example.DACS.Service;
 
+import com.example.DACS.Model.Category;
 import com.example.DACS.Model.Product;
 import com.example.DACS.Model.Supplier;
 import com.example.DACS.Repository.ProductRepository;
@@ -40,10 +41,11 @@ public class SupplierSerVice {
         supplierRepository.save(updateSupplier);
     }
 
-    public void deleteSupplier(String id)
+    public void deleteSupplier(@NotNull Supplier supplier)
     {
-        if(!supplierRepository.existsById(id))
-            throw new IllegalStateException("Supplier with " + id + "dose not exist");
-        supplierRepository.deleteById(id);
+        Supplier updateSupplier = supplierRepository.findById(supplier.getId())
+                .orElseThrow(() -> new IllegalStateException("Supplier with " + supplier.getId() + "dose not exist"));
+        updateSupplier.setStatus(supplier.isStatus());
+        supplierRepository.save(supplier);
     }
 }

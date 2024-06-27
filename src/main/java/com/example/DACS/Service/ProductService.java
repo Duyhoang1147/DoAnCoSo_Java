@@ -40,9 +40,10 @@ public class ProductService {
         updateProduct.setStatus(product.isStatus());
         productRepository.save(updateProduct);
     }
-    public void deleteProduct(String id){
-        if(!productRepository.existsById(id))
-            throw new IllegalStateException("Product with " + id +  " dose not exist");
-        productRepository.deleteById(id);
+    public void deleteProduct(@NotNull Product product){
+        Product updateProduct = productRepository.findById(product.getId())
+                .orElseThrow(() -> new IllegalStateException("Product with " + product.getId() + " dose not exist"));
+        updateProduct.setStatus(product.isStatus());
+        productRepository.save(updateProduct);
     }
 }

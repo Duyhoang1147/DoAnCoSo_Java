@@ -73,6 +73,7 @@ public class SecurityConfig {
                         .realmName("hutech") // Tên miền cho xác thực cơ bản.
                 )
                 .build(); // Xây dựng và trả về chuỗi lọc bảo mật.
+
     }
 }
 

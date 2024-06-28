@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +14,11 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Transactional
 public class ProductService {
     private ProductRepository productRepository;
 
-    public List<Product> getAllProduct(){
-        return productRepository.findAll();
-    }
+    public List<Product> getAllProduct(){ return productRepository.findAll(); }
 
     public void addProduct(Product product){
         productRepository.save(product);

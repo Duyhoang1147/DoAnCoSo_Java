@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration // Đánh dấu lớp này là một lớp cấu hình cho Spring Context.
-@EnableWebSecurity // Kích hoạt tính năng bảo mật web của Spring Security.
+@EnableWebSecurity// Kích hoạt tính năng bảo mật web của Spring Security.
 @RequiredArgsConstructor // Lombok tự động tạo constructor có tham số cho tất cả các trường final.
 public class SecurityConfig {
     private final UserService userService; // Tiêm UserService vào lớp cấu hình này.

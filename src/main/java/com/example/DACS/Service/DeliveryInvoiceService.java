@@ -14,7 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class DeliveryInvoiceService {
-
+    @Autowired
     private DeliveryInvoiceRepository deliveryInvoiceRepository;
 
     public List<DeliveryInvoice> getAllDeliveryInvoices(){

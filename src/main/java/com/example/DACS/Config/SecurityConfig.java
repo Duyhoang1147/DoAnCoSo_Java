@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -42,9 +43,8 @@ public class SecurityConfig {
                         .permitAll() // Cho phép truy cập không cần xác thực.
                         .requestMatchers("/products/edit/**", "/products/add", "/products/delete")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
-                        .requestMatchers("/api/**")
-                        .permitAll() // API mở cho mọi người dùng.
-                        .anyRequest().authenticated() // Bất kỳ yêu cầu nào khác cần xác thực.
+                        .anyRequest()
+                        .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -54,12 +54,7 @@ public class SecurityConfig {
                         .clearAuthentication(true) // Xóa xác thực.
                         .permitAll()
                 )
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login") // Trang đăng nhập.
-                        .loginProcessingUrl("/login") // URL xử lý đăng nhập.
-                        .defaultSuccessUrl("/nhanvien") // Trang sau đăng nhập thành công.
-                        .failureUrl("/login?error") // Trang đăng nhập thất bại.
-                        .permitAll()
+                .formLogin(Customizer.withDefaults()
                 )
                 .rememberMe(rememberMe -> rememberMe
                         .key("hutech")

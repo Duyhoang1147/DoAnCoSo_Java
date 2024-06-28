@@ -8,6 +8,7 @@ import com.example.DACS.Repository.SupplierRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.invoke.MethodHandles;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class SupplierSerVice {
+    @Autowired
     private SupplierRepository supplierRepository;
 
     public List<Supplier> getAllSupplier(){

@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class CategoryService {
-
+    @Autowired
     private CategoryRepository categoryRepository;
 
     public void addCategory(Category category)

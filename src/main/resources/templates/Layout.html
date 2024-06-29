@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -275,6 +276,11 @@
             </ul>
           </div>
         </nav>
+        <div class="container mt-4">
+          <section layout:fragment="content">
+            &lt;!&ndash; Content will be replaced by each specific page &ndash;&gt;
+          </section>
+        </div>
       </div>
     </div>
     <script th:src='@{/assets/js/core/jquery-3.7.1.min.js}'></script>

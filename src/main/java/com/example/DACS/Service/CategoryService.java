@@ -32,6 +32,9 @@ public class CategoryService {
     public List<Category> getAllCategories(){
         return categoryRepository.findAll();
     }
+    public List<Category> getAllCategoriesByStatus(boolean status){
+        return categoryRepository.findAllByStatus(status);
+    }
 
     public void updateCategory(@NotNull Category category)
     {

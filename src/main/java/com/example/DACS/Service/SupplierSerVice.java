@@ -1,9 +1,6 @@
 package com.example.DACS.Service;
 
-import com.example.DACS.Model.Category;
-import com.example.DACS.Model.Product;
 import com.example.DACS.Model.Supplier;
-import com.example.DACS.Repository.ProductRepository;
 import com.example.DACS.Repository.SupplierRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +20,9 @@ public class SupplierSerVice {
 
     public List<Supplier> getAllSupplier(){
         return supplierRepository.findAll();
+    }
+    public List<Supplier> getAllSupplierByStatus(boolean status){
+        return supplierRepository.findAllByStatus(status);
     }
 
     public void addSupplier(Supplier supplier){ supplierRepository.save(supplier); }

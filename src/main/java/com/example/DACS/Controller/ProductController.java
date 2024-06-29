@@ -5,10 +5,12 @@ import com.example.DACS.Service.CategoryService;
 import com.example.DACS.Service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -36,6 +38,7 @@ public class ProductController {
         return "product/add_product";
     }
 
+    @PostMapping("/add")
     public String addProduct(@Valid Product product, BindingResult error)
     {
         if(error.hasErrors()) { return "product/add_product"; }

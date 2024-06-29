@@ -21,6 +21,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<Product> getAllProduct(){ return productRepository.findAll(); }
+    public List<Product> getAllProductByStatus(boolean status){ return productRepository.findAllByStatus(status);}
 
     public void addProduct(Product product){
         productRepository.save(product);
@@ -42,7 +43,7 @@ public class ProductService {
         updateProduct.setStatus(product.isStatus());
         productRepository.save(updateProduct);
     }
-    public void deleteProduct(@NotNull Product product){
+    public void deleteProduct(@NotNull Product product) {
         Product updateProduct = productRepository.findById(product.getId())
                 .orElseThrow(() -> new IllegalStateException("Product with " + product.getId() + " dose not exist"));
         updateProduct.setStatus(product.isStatus());

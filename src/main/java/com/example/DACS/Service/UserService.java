@@ -67,6 +67,14 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
     public List<User> getAllUser(){ return userRepository.findAll();}
+    public void deleteUser(String username) {
+        User us = userRepository.findByUsername(username).isPresent()? userRepository.findByUsername(username).get() : null;
+        if(us != null)
+        {
+            us.setPassword(null);
+            userRepository.save(us);
+        }
+    }
     public List<User> getAllUserByStatus(boolean status){ return userRepository.findAllByStatus(status);}
 }
 

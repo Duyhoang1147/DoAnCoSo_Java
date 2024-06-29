@@ -45,7 +45,7 @@ public class User implements UserDetails {
     private String Address;
 
     private String Phone;
-    private Boolean Status;
+    private Boolean status;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrderInvoice> orderinvoice;

@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
-    long countByCategoryId(String categoryId);
-    List<Product> findAllByStatus(boolean status);
+    List<Product> findAllByStatus(Boolean status);
 }

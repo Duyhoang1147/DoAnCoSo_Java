@@ -28,7 +28,7 @@ public class Supplier {
     @Length(min = 3, max = 100, message = "Địa chỉ  phải nằm trong khoảng 3 đến 100 ký tự")
     String Address;
     String Phone;
-    boolean Status;
+    boolean status;
 
     @ManyToMany
     @JoinTable(

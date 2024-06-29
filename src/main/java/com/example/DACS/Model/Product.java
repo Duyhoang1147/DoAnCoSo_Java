@@ -38,7 +38,7 @@ public class Product {
     private int Quantity;
 
     //private boolean Accept; Khong can thiet nua
-    private boolean Status;
+    private boolean status;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

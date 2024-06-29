@@ -22,5 +22,5 @@ public class Category {
     @Length(min = 3, max = 100, message = "tên chỉ được dài từ 3 đến 100 ký tự")
     private String Name;
 
-    private Boolean Status;
+    private Boolean status;
 }

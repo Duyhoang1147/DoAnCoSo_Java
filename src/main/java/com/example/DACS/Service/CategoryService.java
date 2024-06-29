@@ -2,7 +2,6 @@ package com.example.DACS.Service;
 
 import com.example.DACS.Model.Category;
 import com.example.DACS.Repository.CategoryRepository;
-import com.example.DACS.Repository.ProductRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 @Service
 @AllArgsConstructor
@@ -44,11 +42,10 @@ public class CategoryService {
         categoryRepository.save(updateCategory);
     }
 
-    public void deletecategory(@NotNull Category category)
+    public void deletecategory(String Id)
     {
-        Category updateCategory = categoryRepository.findById(category.getId())
-                .orElseThrow(() -> new IllegalStateException("Category with ID " + category.getId() + " does not exist."));
-        updateCategory.setStatus(category.getStatus());
-        categoryRepository.save(updateCategory);
+        if(!categoryRepository.existsById(Id))
+            throw new IllegalStateException("Category with ID " + Id + " does not exist.");
+        categoryRepository.deleteById(Id);
     }
 }

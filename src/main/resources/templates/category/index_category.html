@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" th:href='@{static/assets/css/bootstrap.min.css}' />
+    <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
+    <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" th:href='@{/assets/css/demo.css}' />
+
+    <script src= '@{/assets/js/plugin/webfont/webfont.min.js}'></script>
+    <script>
+        WebFont.load({
+          google: { families: ["Public Sans:300,400,500,600,700"] },
+          custom: {
+            families: [
+              "Font Awesome 5 Solid",
+              "Font Awesome 5 Regular",
+              "Font Awesome 5 Brands",
+              "simple-line-icons",
+            ],
+            urls: ["../assets/css/fonts.min.css"],
+          },
+          active: function () {
+            sessionStorage.fonts = true;
+          },
+        });
+    </script>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="col-md-12">
+        <div class="card" style="padding-top: 25px">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <a class="btn btn-primary btn-round ms-auto" th:href="@{/categories/add}">Add Category</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="add-row"
+                            class="display table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th style="width: 10%">Action</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="category : ${categories}">
+                            <td th:text="${category.Name}"></td>
+                            <td th:text="${category.Status}"></td>
+                            <td style="display: flex; gap: 10px;">
+                                <div class="form-button-action">
+                                    <a th:href="@{/categories/edit/{id}(id=${category.Id})}" class="btn btn-danger btn-sm">Edit</a>
+                                </div>
+                                <div class="form-button-action">
+                                    <a th:href="@{/categories/delete/{id}(id=${category.Id})}"
+                                       class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -20,13 +20,13 @@ public class CategoryController {
     @GetMapping
     public String listCategories(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "categories/index_category";
+        return "category/index_category";
     }
 
     @GetMapping("/add")
     public String createCategoryForm(Model model) {
         model.addAttribute("category", new Category());
-        return "categories/add_category";
+        return "category/add_category";
     }
 
     @PostMapping("/add")
@@ -35,7 +35,7 @@ public class CategoryController {
                                Model model) {
         if (result.hasErrors()) {
             model.addAttribute("category", category);
-            return "categories/add_category";
+            return "category/add_category";
         }
         categoryService.addCategory(category);
         return "redirect:/categories";
@@ -49,7 +49,7 @@ public class CategoryController {
             return ErrorValuePage.NOTFOUND.value + "Category with id " + id + " not found";
         }
         model.addAttribute("category", category);
-        return "/categories/edit_category";
+        return "/category/edit_category";
     }
 
     @PostMapping("/edit/{id}")
@@ -59,8 +59,9 @@ public class CategoryController {
                                  Model model) {
         if (result.hasErrors()) {
             model.addAttribute("category", category);
-            return "/categories/edit_category";
+            return "/category/edit_category";
         }
+        category.setStatus(true);
         categoryService.updateCategory(category);
         return "redirect:/categories";
     }
@@ -68,10 +69,10 @@ public class CategoryController {
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") String id,
                                  Model model) {
-        Category category = categoryService.findCategoryById(id).isPresent() ? categoryService.findCategoryById(id).get() : null;
-        if (category == null) {
-            return ErrorValuePage.NOTFOUND.value + "Category with id " + id + " not found";
-        }
+        Category category = categoryService.findCategoryById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
+        categoryService.deletecategory(id);
+        model.addAttribute("category", categoryService.getAllCategories());
         return "redirect:/categories";
     }
 }

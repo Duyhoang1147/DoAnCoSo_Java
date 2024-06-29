@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- CSS Files -->
-    <link rel="stylesheet" href="../../static/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../static/assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="../../static/assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" th:href='@{static/assets/css/bootstrap.min.css}' />
+    <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
+    <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="../../static/assets/css/demo.css" />
+    <link rel="stylesheet" th:href='@{/assets/css/demo.css}' />
 
-    <script src="../../static/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src= '@{/assets/js/plugin/webfont/webfont.min.js}'></script>
     <script>
         WebFont.load({
           google: { families: ["Public Sans:300,400,500,600,700"] },

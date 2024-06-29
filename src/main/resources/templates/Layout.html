@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../static/assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="../static/assets/css/kaiadmin.min.css" />
-    
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="../static/assets/css/demo.css" />
+    <link rel="stylesheet" th:href='@{/assets/css/bootstrap.min.css}' />
+    <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
+    <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
 
-    <script src="../static/assets/js/plugin/webfont/webfont.min.js"></script>
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" th:href= '@{/assets/css/demo.css}' />
+
+    <script th:src='@{/assets/js/plugin/webfont/webfont.min.js}'></script>
     <script>
       WebFont.load({
         google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -42,7 +43,7 @@
         <div class="logo-header" data-background-color="dark">
           <a href="Layout.html" class="logo">
             <img
-              src="../static/assets/img/kaiadmin/logo_light.svg"
+              src='@{/assets/img/kaiadmin/logo_light.svg}'
               alt="navbar brand"
               class="navbar-brand"
               height="20"/>
@@ -276,41 +277,41 @@
         </nav>
       </div>
     </div>
-    <script src="../static/assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="../static/assets/js/core/popper.min.js"></script>
-    <script src="../static/assets/js/core/bootstrap.min.js"></script>
+    <script th:src='@{/assets/js/core/jquery-3.7.1.min.js}'></script>
+    <script th:src='@{/assets/js/core/popper.min.js}'></script>
+    <script th:src='@{/assets/js/core/bootstrap.min.js}'></script>
 
     <!-- jQuery Scrollbar -->
-    <script src="../static/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script th:src='@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}'></script>
 
     <!-- Chart JS -->
-    <script src="../static/assets/js/plugin/chart.js/chart.min.js"></script>
+    <script th:src='@{/assets/js/plugin/chart.js/chart.min.js}'></script>
 
     <!-- jQuery Sparkline -->
-    <script src="../static/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+    <script th:src='@{/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js}'></script>
 
     <!-- Chart Circle -->
-    <script src="../static/assets/js/plugin/chart-circle/circles.min.js"></script>
+    <script th:src='@{/assets/js/plugin/chart-circle/circles.min.js}'></script>
 
     <!-- Datatables -->
-    <script src="../static/assets/js/plugin/datatables/datatables.min.js"></script>
+    <script th:src='@{/assets/js/plugin/datatables/datatables.min.js}'></script>
 
     <!-- Bootstrap Notify -->
-    <script src="../static/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script th:src='@{/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js}'></script>
 
     <!-- jQuery Vector Maps -->
-    <script src="../static/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-    <script src="../static/assets/js/plugin/jsvectormap/world.js"></script>
+    <script th:src='@{/assets/js/plugin/jsvectormap/jsvectormap.min.js}'></script>
+    <script th:src='@{/assets/js/plugin/jsvectormap/world.js}'></script>
 
     <!-- Sweet Alert -->
-    <script src="../static/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script th:src='@{/assets/js/plugin/sweetalert/sweetalert.min.js}'></script>
 
     <!-- Kaiadmin JS -->
-    <script src="../static/assets/js/kaiadmin.min.js"></script>
+    <script th:src='@{/assets/js/kaiadmin.min.js}'></script>
 
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="../static/assets/js/setting-demo.js"></script>
-    <script src="../static/assets/js/demo.js"></script>
+    <script th:src='@{/assets/js/setting-demo.js}'></script>
+    <script th:src='@{/assets/js/demo.js}'></script>
     <script>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",

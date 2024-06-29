@@ -25,6 +25,9 @@ public class SupplierSerVice {
     public List<Supplier> getAllSupplier(){
         return supplierRepository.findAll();
     }
+    public List<Supplier> getAllSupplierByStatus(boolean status){
+        return supplierRepository.findAllByStatus(status);
+    }
 
     public void addSupplier(Supplier supplier){ supplierRepository.save(supplier); }
 

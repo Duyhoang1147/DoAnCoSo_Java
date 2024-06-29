@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 @Service
 @Slf4j
@@ -64,6 +66,8 @@ public class UserService implements UserDetailsService {
             UsernameNotFoundException {
         return userRepository.findByUsername(username);
     }
+    public List<User> getAllUser(){ return userRepository.findAll();}
+    public List<User> getAllUserByStatus(boolean status){ return userRepository.findAllByStatus(status);}
 }
 
 

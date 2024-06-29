@@ -58,10 +58,10 @@ public class CategoryController {
                                  BindingResult result,
                                  Model model) {
         if (result.hasErrors()) {
+            category.setId(id);
             model.addAttribute("category", category);
             return "/category/edit_category";
         }
-        category.setStatus(true);
         categoryService.updateCategory(category);
         return "redirect:/categories";
     }

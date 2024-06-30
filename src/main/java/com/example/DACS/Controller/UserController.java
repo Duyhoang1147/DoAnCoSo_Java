@@ -37,6 +37,7 @@ public class UserController {
                            BindingResult result,
                            Model model) {
         if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
             model.addAttribute("user", user);
             return "users/add_user";
         }

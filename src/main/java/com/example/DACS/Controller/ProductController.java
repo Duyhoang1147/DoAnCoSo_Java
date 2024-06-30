@@ -1,6 +1,7 @@
 package com.example.DACS.Controller;
 
 import com.example.DACS.Model.Product;
+import com.example.DACS.Model.Supplier;
 import com.example.DACS.Service.CategoryService;
 import com.example.DACS.Service.ProductService;
 import com.example.DACS.Service.SupplierSerVice;
@@ -13,6 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/products")
@@ -51,6 +55,7 @@ public class ProductController {
             model.addAttribute("product", product);
             return "product/add_product";
         }
+        product.setSupplier(product.getSupplier());
         productService.addProduct(product);
         return "redirect:/products";
     }

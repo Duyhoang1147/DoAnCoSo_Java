@@ -58,7 +58,12 @@
                             <td th:text="${user.address}"></td>
                             <td th:text="${user.phone}"></td>
                             <td th:text="${user.status ? 'Active' : 'Inactive'}"></td>
-                            <td th:text="${#strings.arrayJoin(user.roles.toArray(), ', ')}"></td>
+                            <td>
+                                <span th:each="role, status : ${user.roles}">
+                                    <span th:text="${role.name}"></span>
+                                    <span th:if="${!status.last}">, </span>
+                                </span>
+                            </td>
                             <td>
                                 <div class="form-button-action">
                                     <a th:href="@{/users/edit/{username}(username=${user.username})}" class="btn btn-warning btn-sm">Edit</a>

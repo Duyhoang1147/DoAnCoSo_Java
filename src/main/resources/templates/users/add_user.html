@@ -70,6 +70,15 @@
                     <option value="false">Inactive</option>
                 </select>
             </div>
+            <div class="mb-3">
+                <label>Select Roles:</label>
+                <div th:each="role : ${roles}">
+                    <div>
+                        <input type="checkbox" th:id="'role_' + ${role.id}" th:name="'roles'" th:value="${role.id}"/>
+                        <label th:for="'role_' + ${role.id}" th:text="${role.name}"></label>
+                    </div>
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

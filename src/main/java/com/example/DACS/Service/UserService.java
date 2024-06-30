@@ -32,6 +32,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setId(IdGeneratorService.generateUniqueId());
         userRepository.save(user);
+        setDefaultRole(user.getUsername());
     }
 
     // Gán vai trò mặc định cho người dùng dựa trên tên người dùng.

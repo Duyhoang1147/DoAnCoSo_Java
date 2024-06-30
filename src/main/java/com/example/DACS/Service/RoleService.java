@@ -1,12 +1,13 @@
 package com.example.DACS.Service;
 
-import com.example.DACS.Another.RoleValue;
 import com.example.DACS.Model.Role;
 import com.example.DACS.Model.User;
 import com.example.DACS.Repository.RoleRepository;
 import com.example.DACS.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RoleService {
@@ -24,5 +25,8 @@ public class RoleService {
     public void addRoleToUser(String roleValue, String userName) {
         Role r = roleRepository.findRoleById(roleValue);
         userRepository.findByUsername(userName).ifPresent(user -> user.getRoles().add(r));
+    }
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
     }
 }

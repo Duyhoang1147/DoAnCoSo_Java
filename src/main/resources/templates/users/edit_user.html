@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
+    <title>Add User</title>
     <link rel="stylesheet" th:href='@{static/assets/css/bootstrap.min.css}' />
     <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
     <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
@@ -24,12 +24,12 @@
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
-    <h1>Edit User</h1>
+    <h1>Add User</h1>
     <div class="form-group">
-        <form th:action="@{/users/edit/{username}(username=${user.username})}" th:object="${user}" method="post">
+        <form th:action="@{/users/edit/{username}(username=${user.username})}"  th:object="${user}" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
-                <input type="text" id="username" th:field="*{username}" class="form-control" readonly/>
+                <input type="text" id="username" th:field="*{username}" class="form-control"/>
                 <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
             </div>
             <div class="mb-3">
@@ -69,6 +69,16 @@
                     <option value="true">Active</option>
                     <option value="false">Inactive</option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label>Select Roles:</label>
+                <div th:each="role : ${roles}">
+                    <div>
+                        <input type="checkbox" th:id="'role_' + ${role.id}" th:name="'roles'" th:value="${role.id}"
+                               th:checked="${user.roles.contains(role)}"/>
+                        <label th:for="'role_' + ${role.id}" th:text="${role.name}"></label>
+                    </div>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

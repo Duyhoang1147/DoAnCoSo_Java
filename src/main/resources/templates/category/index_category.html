@@ -51,13 +51,11 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Status</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                         </thead>
                         <tr th:each="category : ${categories}">
                             <td th:text="${category.Name}"></td>
-                            <td th:text="${category.Status}"></td>
                             <td style="display: flex; gap: 10px;">
                                 <div class="form-button-action">
                                     <a th:href="@{/categories/edit/{id}(id=${category.Id})}" class="btn btn-danger btn-sm">Edit</a>

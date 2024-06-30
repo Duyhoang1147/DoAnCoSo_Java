@@ -61,7 +61,7 @@
                                     <section layout:fragment="content" class="container mt-5">
                                         <h1>Create Product</h1>
                                         <div class="form-group">
-                                            <form th:action="@{/categories/edit}" th:object="${category}" method="post">
+                                            <form th:action="@{/categories/edit/{id}(id=${category.Id})}" th:object="${category}" method="post">
                                                 <div class="mb-3">
                                                     <label for="Id" class="form-label">Category Id:</label>
                                                     <input type="text" id="Id" th:field="*{Id}" class="form-control"/>

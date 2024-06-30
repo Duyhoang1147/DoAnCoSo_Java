@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Order Invoice</title>
+    <link rel="stylesheet" th:href='@{static/assets/css/bootstrap.min.css}' />
+    <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
+    <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
+    <link rel="stylesheet" th:href='@{/assets/css/demo.css}' />
+    <script src='@{/assets/js/plugin/webfont/webfont.min.js}'></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: ["Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+                urls: ["../assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <h1>Add Order Invoice</h1>
+    <div class="form-group">
+        <form th:action="@{/orderinvoices/add}" th:object="${orderInvoice}" method="post">
+            <div class="mb-3">
+                <label for="Id" class="form-label">Id:</label>
+                <input type="text" id="Id" th:field="*{id}" class="form-control"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('Id')}"
+                     th:errors="*{id}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="createDate" class="form-label">Create Date:</label>
+                <input type="date" id="createDate" th:field="*{create}" class="form-control"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('create')}" th:errors="*{create}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="user" class="form-label">User:</label>
+                <select id="user" th:field="*{user}" class="form-control">
+                    <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.username}"></option>
+                </select>
+                <div class="text-danger" th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></div>
+            </div>
+            <div class="mb-3">
+                <label>Select Products:</label>
+                <div th:each="p : ${products}">
+                    <div>
+                        <input type="checkbox" th:id="'product_' + ${p.id}" th:name="'product'" th:value="${p.id}"/>
+                        <label th:for="'product_' + ${p.id}" th:text="${p.name}"></label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

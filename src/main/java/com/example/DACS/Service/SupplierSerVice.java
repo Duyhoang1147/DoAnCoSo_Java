@@ -1,5 +1,6 @@
 package com.example.DACS.Service;
 
+import com.example.DACS.Model.Product;
 import com.example.DACS.Model.Supplier;
 import com.example.DACS.Repository.SupplierRepository;
 import jakarta.validation.constraints.NotNull;
@@ -38,15 +39,12 @@ public class SupplierSerVice {
         updateSupplier.setName(supplier.getName());
         updateSupplier.setAddress((supplier.getAddress()));
         updateSupplier.setPhone(supplier.getPhone());
-        updateSupplier.setStatus(supplier.isStatus());
         supplierRepository.save(updateSupplier);
     }
 
-    public void deleteSupplier(@NotNull Supplier supplier)
-    {
-        Supplier updateSupplier = supplierRepository.findById(supplier.getId())
-                .orElseThrow(() -> new IllegalStateException("Supplier with " + supplier.getId() + "dose not exist"));
-        updateSupplier.setStatus(supplier.isStatus());
-        supplierRepository.save(supplier);
+    public void deleteSupplier(String Id) {
+        if (!supplierRepository.existsById(Id))
+            throw new IllegalStateException("Category with ID " + Id + " does not exist.");
+        supplierRepository.deleteById(Id);
     }
 }

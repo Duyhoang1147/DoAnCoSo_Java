@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security6"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Layout}">
 <head>
@@ -41,42 +40,31 @@
         <div class="card" style="padding-top: 25px">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <a class="btn btn-primary btn-round ms-auto" th:href="@{/products/add}">Add Product</a>
+                    <h1>Supplier</h1>
+                    <a class="btn btn-primary btn-round ms-auto" th:href="@{/suppliers/add}">Add Category</a>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table
-                            id="add-row"
-                            class="display table table-striped table-hover">
+                    <table id="add-row" class="display table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Image</th>
-                            <th>Decription</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Category</th>
-                            <th>Supplier</th>
+                            <th>Address</th>
+                            <th>Phone</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                         </thead>
-                        <tr th:each="product : ${product}">
-                            <td th:text="${product.Name}"></td>
-                            <td><img src="">
-                            <td th:text="${product.Decription}"></td>
-                            <td th:text="${product.Price}"></td>
-                            <td th:text="${product.Quantity}"></td>
-                            <td th:text="${product.category.Name}"></td>
-                            <td>
-                                <span th:each="supplier : ${product.supplier}" th:text="${supplier.name}"></span>
-                            </td>
-                            <td>
+                        <tr th:each="supplier : ${supplier}">
+                            <td th:text="${supplier.Name}"></td>
+                            <td th:text="${supplier.Address}"></td>
+                            <td th:text="${supplier.Phone}"></td>
+                            <td style="display: flex; gap: 10px;">
                                 <div class="form-button-action">
-                                    <a th:href="@{/products/edit/{id}(id=${product.Id})}"></a>
+                                    <a th:href="@{/suppliers/edit/{id}(id=${supplier.Id})}" class="btn btn-danger btn-sm">Edit</a>
                                 </div>
                                 <div class="form-button-action">
-                                    <a th:href="@{/products/delete/{id}(id=${product.id})}"
+                                    <a th:href="@{/suppliers/delete/{id}(id=${supplier.Id})}"
                                        class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                                 </div>
                             </td>

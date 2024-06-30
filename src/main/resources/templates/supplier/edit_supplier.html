@@ -61,58 +61,31 @@
                                     <section layout:fragment="content" class="container mt-5">
                                         <h1>Create Product</h1>
                                         <div class="form-group">
-                                            <form th:action="@{/products/add}" th:object="${product}" method="post">
+                                            <form th:action="@{/suppliers/edit/{id}(id=${supplier.Id})}" th:object="${supplier}" method="post">
                                                 <div class="mb-3">
-                                                    <label for="Id" class="form-label">Product Name:</label>
+                                                    <label for="Id" class="form-label">Supplier Id:</label>
                                                     <input type="text" id="Id" th:field="*{Id}" class="form-control"/>
                                                     <div class="text-danger" th:if="${#fields.hasErrors('Id')}"
                                                          th:errors="*{Id}"></div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="Name" class="form-label">Product Name:</label>
+                                                    <label for="Name" class="form-label">Supplier Name:</label>
                                                     <input type="text" id="Name" th:field="*{Name}" class="form-control"/>
                                                     <div class="text-danger" th:if="${#fields.hasErrors('Name')}"
                                                          th:errors="*{Name}"></div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="Image" class="form-label">Product Image:</label>
-                                                    <input type="file" id="Image" th:field="*{Image}" class="form-control"/>
-                                                    <div class="text-danger" th:if="${#fields.hasErrors('Image')}"
-                                                         th:errors="*{Image}"></div>
+                                                    <label for="Address" class="form-label">Supplier Address:</label>
+                                                    <input type="text" id="Address" th:field="*{Address}" class="form-control"/>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('Address')}"
+                                                         th:errors="*{Address}"></div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="Decription" class="form-label">Product Decription:</label>
-                                                    <textarea id="Decription" th:field="*{Decription}" class="form-control"/>
-                                                    <div class="text-danger" th:if="${#fields.hasErrors('Decription')}"
-                                                         th:errors="*{Decription}"></div>
+                                                    <label for="Phone" class="form-label">Supplier Phone:</label>
+                                                    <input type="text" id="Phone" th:field="*{Phone}" class="form-control"/>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('Phone')}"
+                                                         th:errors="*{Phone}"></div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="Price" class="form-label">Product Price:</label>
-                                                    <input type="text" id="Price" th:field="*{Price}" class="form-control"/>
-                                                    <div class="text-danger" th:if="${#fields.hasErrors('Price')}"
-                                                         th:errors="*{Price}"></div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="Quantity" class="form-label">Product Quantity:</label>
-                                                    <input type="text" id="Quantity" th:field="*{Quantity}" class="form-control"/>
-                                                    <div class="text-danger" th:if="${#fields.hasErrors('Quantity')}"
-                                                         th:errors="*{Quantity}"></div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="category" class="form-label">Category:</label>
-                                                    <select th:field="*{category}" class="form-control" id="category">
-                                                        <option th:each="category : ${category}"
-                                                                th:value="${category.Id}" th:text="${category.Name}"></option>
-                                                    </select>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="supplier" class="form-label">Supplier:</label>
-                                                    <select th:field="*{supplier}" class="form-control" id="supplier">
-                                                        <option th:each="supplier : ${supplier}"
-                                                                th:value="${supplier.Id}" th:text="${supplier.Name}"></option>
-                                                    </select>
-                                                </div>
-
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
                                         </div>

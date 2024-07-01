@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class ProductController {
             model.addAttribute("product", product);
             return "product/add_product";
         }
-        product.setSupplier(product.getSupplier());
+        product.setImage("/Images/" + product.getImage());
         productService.addProduct(product);
         return "redirect:/products";
     }

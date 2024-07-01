@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:layout=""
-      layout:decorate="~{layoutShop}">
+      layout:decorate="~{layoutShop}" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>Twitter Bootstrap shopping cart</title>
@@ -26,25 +26,29 @@
                     <div class="span5">
                         <div id="myCarousel" class="carousel slide cntr">
                             <div class="carousel-inner">
-                                <img th:src="${product.Image}" alt="Image" style="width:100%">
+                                <div class="item active">
+                                    <img th:src="${product.Image}" alt="Image" style="width:100%">
+                                </div>
                             </div>
-                            <div class="span7">
-                                <h3 th:text="${product.Name}"></h3>
-                                <hr class="soft"/>
-                                <form class="form-horizontal qtyFrm">
-                                    <div class="control-group">
-                                        <label class="control-label"><span th:text="${product.Price}"></span></label>
-                                        <div class="controls">
-                                            <input type="number" class="span6" placeholder="Qty.">
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Add to cart</button>
-                                </form>
-                            </div>
-                            <h3>Decription</h3>
-                            <p th:text="${product.Decription}"></p>
                         </div>
                     </div>
+                    <div class="span7">
+                        <h3 th:text="${product.Name}"></h3>
+                        <hr class="soft"/>
+                        <form class="form-control">
+                            <div class="control-group">
+                                <label class="control-label"><h3>Price</h3></label>
+                                <h4 th:text="${product.Price}"></h4>
+                                <label class="control-label"><h3>Quantity</h3></label>
+                                <input type="number" placeholder="0" style="width: 30px">
+                            </div>
+                            <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade active in" id="home">
+                    <h4>Product Information</h4>
+                    <p th:text="${product.Decription}"></p>
                 </div>
             </div>
         </div>

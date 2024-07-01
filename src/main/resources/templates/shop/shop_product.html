@@ -19,30 +19,52 @@
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
-    <div class="navbar">
-        <h3>Product</h3>
-        <div class="thumbnails">
-            <ul  th:each="product : ${product}">
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a><img th:src="${product.Image}" alt="Image"></a>
-                        <div class="caption cntr">
-                            <p th:text="${product.Name}"></p>
-                            <p th:text="${product.Price}"><strong></strong></p>
-                            <form>
-                                <input type="number" name="quantity" min="1" value="1" class="formcontrol d-inline-block" style="width: 70px;">
-                                <input type="hidden" th:value="${product.Id}" name="productId"/>
-                                <button type="submit" class="shopBtn">Add to Cart</button>
-                            </form>
-                            <br class="clr">
-                        </div>
-                    </div>
-                </li>
-            </ul>
+    <div class="row">
+        <div id="sidebar" class="span3">
+            <div class="well well-small">
+                <ul class="nav nav-list">
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Fashion</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Watches</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Fine Jewelry</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Fashion Jewelry</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Engagement & Wedding</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Men's Jewelry</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Vintage & Antique</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Loose Diamonds </a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>Loose Beads</a></li>
+                    <li><a href="products.html"><span class="icon-chevron-right"></span>See All Jewelry & Watches</a></li>
+                    <li style="border:0"> &nbsp;</li>
+                    <li> <a class="totalInCart" href="cart.html"><strong>Total Amount  <span class="badge badge-warning pull-right" style="line-height:18px;">$448.42</span></strong></a></li>
+                </ul>
+            </div>
         </div>
-
+        <div class="span9">
+            <div class="well well-small">
+                <h3>Our Products </h3>
+                <div class="row-fluid">
+                    <div class="thumbnails">
+                        <ul th:each="product : ${product}">
+                            <li class="span4">
+                                <div class="thumbnail">
+                                    <img th:src="${product.Image}" alt="Image">
+                                    <a th:href="@{/shop/product/{id}(id=${product.Id})}">See detail</a>
+                                    <div class="caption cntr">
+                                        <p th:text="${product.Name}"></p>
+                                        <p th:text="${product.Price}"><strong></strong></p>
+                                        <form>
+                                            <input type="number" name="quantity" min="1" value="1" class="formcontrol d-inline-block" style="width: 70px;">
+                                            <input type="hidden" th:value="${product.Id}" name="productId"/>
+                                            <button type="submit" class="shopBtn">Add to Cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
-
 </body>
 </html>

@@ -43,7 +43,7 @@ public class ProductController {
     {
         model.addAttribute("product", new Product());
         model.addAttribute("category", categoryService.getAllCategories());
-        model.addAttribute("supplier", supplierSerVice.getAllSupplier());
+        model.addAttribute("suppliers", supplierSerVice.getAllSupplier());
         return "product/add_product";
     }
 
@@ -55,7 +55,6 @@ public class ProductController {
             model.addAttribute("product", product);
             return "product/add_product";
         }
-        product.setSupplier(product.getSupplier());
         productService.addProduct(product);
         return "redirect:/products";
     }

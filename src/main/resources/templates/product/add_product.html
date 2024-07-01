@@ -63,7 +63,7 @@
                                         <div class="form-group">
                                             <form th:action="@{/products/add}" th:object="${product}" method="post">
                                                 <div class="mb-3">
-                                                    <label for="Id" class="form-label">Product Name:</label>
+                                                    <label for="Id" class="form-label">Product Id:</label>
                                                     <input type="text" id="Id" th:field="*{Id}" class="form-control"/>
                                                     <div class="text-danger" th:if="${#fields.hasErrors('Id')}"
                                                          th:errors="*{Id}"></div>
@@ -106,12 +106,15 @@
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="supplier" class="form-label">Supplier:</label>
-                                                    <select th:field="*{supplier}" class="form-control" id="supplier">
-                                                        <option th:each="supplier : ${supplier}"
-                                                                th:value="${supplier.Id}" th:text="${supplier.Name}"></option>
-                                                    </select>
+                                                    <label>Select Suppliers:</label>
+                                                    <div th:each="s : ${suppliers}">
+                                                        <div>
+                                                            <input type="checkbox" th:id="'supplier_' + ${s.id}" th:name="'supplier'" th:value="${s.id}"/>
+                                                            <label th:for="'supplier_' + ${s.id}" th:text="${s.name}"></label>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
 
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>

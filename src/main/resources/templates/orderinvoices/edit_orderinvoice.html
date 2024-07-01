@@ -43,7 +43,7 @@
                 <label>Select Products:</label>
                 <div th:each="p : ${products}">
                     <div>
-                        <input type="checkbox" th:id="'product_' + ${p.id}" th:name="'products'" th:value="${p.id}"
+                        <input type="checkbox" th:id="'product_' + ${p.id}" th:name="'product'" th:value="${p.id}"
                                th:checked="${orderInvoice.product.contains(p)}"/>
                         <label th:for="'product_' + ${p.id}" th:text="${p.name}"></label>
                     </div>

@@ -29,6 +29,7 @@ public class UserController {
     @GetMapping("/add")
     public String createUserForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "users/add_user";
     }
 
@@ -37,7 +38,9 @@ public class UserController {
                            BindingResult result,
                            Model model) {
         if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
             model.addAttribute("user", user);
+            model.addAttribute("roles", roleService.getAllRoles());
             return "users/add_user";
         }
         userService.save(user);
@@ -52,6 +55,7 @@ public class UserController {
             return ErrorValuePage.NOTFOUND.value + "UserName " + userName + " not found";
         }
         model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.getAllRoles());
         return "/users/edit_user";
     }
 
@@ -62,6 +66,7 @@ public class UserController {
                              Model model) {
         if (result.hasErrors()) {
             model.addAttribute("user", user);
+            model.addAttribute("roles", roleService.getAllRoles());
             return "/users/edit_user";
         }
         User userFind = userService.findByUsername(userName).isPresent() ? userService.findByUsername(userName).get() : null;

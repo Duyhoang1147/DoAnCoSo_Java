@@ -1,8 +1,7 @@
 package com.example.DACS.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +27,13 @@ public class Product {
     private String Decription;
 
     @NotNull(message = "Giá tiền không thể bỏ trống")
+    @Min(value = 0)
+    @Max(value = 1000000000)
     private Double Price;
 
     @NotNull(message = "Số lượng không thể bỏ trống")
+    @Min(value = 1)
+    @Max(value = 1000000000)
     private int Quantity;
 
     //private boolean Accept; Khong can thiet nua

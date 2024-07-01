@@ -30,7 +30,9 @@ public class UserService implements UserDetailsService {
     // Lưu người dùng mới vào cơ sở dữ liệu sau khi mã hóa mật khẩu.
     public void save(@NotNull User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setId(IdGeneratorService.generateUniqueId());
         userRepository.save(user);
+        setDefaultRole(user.getUsername());
     }
 
     // Gán vai trò mặc định cho người dùng dựa trên tên người dùng.
@@ -68,12 +70,7 @@ public class UserService implements UserDetailsService {
     }
     public List<User> getAllUser(){ return userRepository.findAll();}
     public void deleteUser(String username) {
-        User us = userRepository.findByUsername(username).isPresent()? userRepository.findByUsername(username).get() : null;
-        if(us != null)
-        {
-            us.setPassword(null);
-            userRepository.save(us);
-        }
+        userRepository.deleteByUsername(username);
     }
     public List<User> getAllUserByStatus(boolean status){ return userRepository.findAllByStatus(status);}
 }

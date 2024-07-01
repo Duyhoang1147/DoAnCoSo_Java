@@ -36,8 +36,8 @@ public class User implements UserDetails {
     private String Name;
     private Boolean Gender;
 
-    @Max(value = 0)
-    @Min(value = 100)
+    @Max(value = 100)
+    @Min(value = 0)
     private int Age;
 
     @NotBlank(message = "Địa chỉ không thể bỏ trống")

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout=""
+      layout:decorate="~{layoutShop}">
+<head>
+    <meta charset="utf-8">
+    <title>Twitter Bootstrap shopping cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" th:href='@{/assetsShop/css/bootstrap.css}'/>
+    <link rel="stylesheet" th:href='@{/assetsShop/style.css}'/>
+    <link rel="stylesheet" th:href='@{/assetsShop/font-awesome/css/font-awesome.css}'/>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href='@{/assetsShop/ico/favicon.ico}'/>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <div class="navbar">
+        <h3>Product</h3>
+        <div class="thumbnails">
+            <ul  th:each="product : ${product}">
+                <li class="span3">
+                    <div class="thumbnail">
+                        <a><img th:src="${product.Image}" alt="Image"></a>
+                        <div class="caption cntr">
+                            <p th:text="${product.Name}"></p>
+                            <p th:text="${product.Price}"><strong></strong></p>
+                            <form>
+                                <input type="number" name="quantity" min="1" value="1" class="formcontrol d-inline-block" style="width: 70px;">
+                                <input type="hidden" th:value="${product.Id}" name="productId"/>
+                                <button type="submit" class="shopBtn">Add to Cart</button>
+                            </form>
+                            <br class="clr">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

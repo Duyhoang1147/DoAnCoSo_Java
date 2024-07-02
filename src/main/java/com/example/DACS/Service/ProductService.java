@@ -2,22 +2,16 @@ package com.example.DACS.Service;
 
 import com.example.DACS.Model.Category;
 import com.example.DACS.Model.Product;
-import com.example.DACS.Model.Supplier;
 import com.example.DACS.Repository.ProductRepository;
-import com.example.DACS.Repository.SupplierRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.*;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -26,9 +20,6 @@ import java.util.UUID;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    private SupplierRepository supplierRepository;
 
     public List<Product> getAllProduct(){ return productRepository.findAll(); }
     public List<Product> getAllProductByCategory(Category category){ return productRepository.findAllByCategory(category); }
@@ -58,9 +49,7 @@ public class ProductService {
     public void deleteProduct(@NotNull String id) {
         Product updateProduct = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Product with " + id + " dose not exist"));
-        for (Supplier supplier : updateProduct.getSupplier()) {
-            supplier.getProduct().remove(updateProduct);
-        }
+        updateProduct.getSupplier().forEach(supplier -> supplier.getProduct().remove(updateProduct));
         productRepository.delete(updateProduct);
     }
 }

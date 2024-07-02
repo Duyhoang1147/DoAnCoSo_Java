@@ -67,7 +67,6 @@ public class ProductController {
             model.addAttribute("product", product);
             return "product/add_product";
         }
-        product.setImage("/Images/" + product.getImage());
         productService.addProduct(product);
         return "redirect:/products";
     }

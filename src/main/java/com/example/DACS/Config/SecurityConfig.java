@@ -36,13 +36,13 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(@NotNull HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/webjars/**", "/js/**", "/", "/oauth/**", "/register", "/error",
                                 "/products", "/cart", "/cart/**")
                         .permitAll() // Cho phép truy cập không cần xác thực.
                         .anyRequest()
-                        .permitAll() // Bất kỳ yêu cầu nào khác cần xác thực.
+                        .authenticated() // Bất kỳ yêu cầu nào khác cần xác thực.
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

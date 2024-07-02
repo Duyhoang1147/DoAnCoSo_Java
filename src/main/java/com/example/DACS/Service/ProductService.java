@@ -2,7 +2,9 @@ package com.example.DACS.Service;
 
 import com.example.DACS.Model.Category;
 import com.example.DACS.Model.Product;
+import com.example.DACS.Model.Supplier;
 import com.example.DACS.Repository.ProductRepository;
+import com.example.DACS.Repository.SupplierRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,9 @@ import java.util.UUID;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private SupplierRepository supplierRepository;
 
     public List<Product> getAllProduct(){ return productRepository.findAll(); }
     public List<Product> getAllProductByCategory(Category category){ return productRepository.findAllByCategory(category); }
@@ -53,6 +58,9 @@ public class ProductService {
     public void deleteProduct(@NotNull String id) {
         Product updateProduct = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Product with " + id + " dose not exist"));
+        for (Supplier supplier : updateProduct.getSupplier()) {
+            supplier.getProduct().remove(updateProduct);
+        }
         productRepository.delete(updateProduct);
     }
 }

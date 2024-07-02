@@ -47,8 +47,5 @@ public class Product {
     private List<DeliveryInvoice> deliveryinvoice;
 
     @ManyToMany(mappedBy = "product")
-    private List<OrderInvoice> orderInvoice;
-
-    @ManyToMany(mappedBy = "product")
     private List<Supplier> supplier;
 }

@@ -1,5 +1,6 @@
 package com.example.DACS.Controller;
 
+import com.example.DACS.Model.Category;
 import com.example.DACS.Model.Product;
 import com.example.DACS.Model.Supplier;
 import com.example.DACS.Service.CategoryService;
@@ -59,5 +60,17 @@ public class ProductController {
         product.setImage("/Images/" + product.getImage());
         productService.addProduct(product);
         return "redirect:/products";
+    }
+
+    @PostMapping("/filter")
+    public String filterProduct(@RequestParam("category") String categoryId, Model model)
+    {
+        if(categoryId == null)
+            return "redirect:/products";
+        Category category = new Category();
+        category.setId(categoryId);
+        List<Product> filteredProduct = productService.getAllProductByCategory(category);
+        model.addAttribute("filterProduct", filteredProduct);
+        return "product/index_product";
     }
 }

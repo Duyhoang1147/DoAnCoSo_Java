@@ -7,6 +7,8 @@ import com.example.DACS.Repository.UserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -68,6 +70,24 @@ public class UserService implements UserDetailsService {
             UsernameNotFoundException {
         return userRepository.findByUsername(username);
     }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) principal;
+            // Lấy User từ username bằng UserRepository
+            Optional<User> userOptional = userRepository.findByUsername(userDetails.getUsername());
+            return userOptional.orElse(null); // Hoặc xử lý tùy ý nếu không tìm thấy user
+        }
+
+        return null;
+    }
+
     public List<User> getAllUser(){ return userRepository.findAll();}
     public void deleteUser(String username) {
         userRepository.deleteByUsername(username);

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout=""
+      layout:decorate="~{layoutShop}">
+<head>
+    <meta charset="utf-8">
+    <title>Twitter Bootstrap shopping cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" th:href='@{/assetsShop/css/bootstrap.css}'/>
+    <link rel="stylesheet" th:href='@{/assetsShop/style.css}'/>
+    <link rel="stylesheet" th:href='@{/assetsShop/font-awesome/css/font-awesome.css}'/>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href='@{/assetsShop/ico/favicon.ico}'/>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-3">
+        <h1>Order Confirmation</h1>
+        <p th:text="${message}"></p>
+        <a href="/shop/product">Back to Shop</a>
+</section>
+</body>
+</html>

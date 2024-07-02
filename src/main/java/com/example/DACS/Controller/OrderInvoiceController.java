@@ -1,16 +1,17 @@
 package com.example.DACS.Controller;
 
 import com.example.DACS.Another.ErrorValuePage;
+import com.example.DACS.Model.Cart;
 import com.example.DACS.Model.OrderInvoice;
-import com.example.DACS.Service.OrderInvoiceService;
-import com.example.DACS.Service.ProductService;
-import com.example.DACS.Service.UserService;
+import com.example.DACS.Service.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/orderinvoices")
@@ -24,6 +25,9 @@ public class OrderInvoiceController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CartService cartService;
 
     @GetMapping
     public String listOrderInvoices(Model model) {
@@ -88,5 +92,16 @@ public class OrderInvoiceController {
         }
         orderInvoiceService.deleteOrderInvoice(orderId);
         return "redirect:/orderinvoices";
+    }
+
+    @GetMapping("/checkout")
+    public String confirmOrder(Model model)
+    {
+        List<Cart> carts = cartService.getCart();
+        if(carts.isEmpty())
+            return "redirect:/cart";
+        orderInvoiceService.creatorder(carts);
+        model.addAttribute("message", "Your order has been successfully placed.");
+        return "cart/order-confirmation";
     }
 }

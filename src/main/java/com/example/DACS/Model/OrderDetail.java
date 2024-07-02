@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @RequiredArgsConstructor
@@ -15,10 +17,13 @@ import lombok.Setter;
 public class OrderDetail {
     @Id
     private String id;
+
     private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private OrderInvoice orderInvoice;

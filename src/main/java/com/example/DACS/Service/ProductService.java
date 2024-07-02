@@ -1,5 +1,6 @@
 package com.example.DACS.Service;
 
+import com.example.DACS.Model.Category;
 import com.example.DACS.Model.Product;
 import com.example.DACS.Repository.ProductRepository;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<Product> getAllProduct(){ return productRepository.findAll(); }
+    public List<Product> getAllProductByCategory(Category category){ return productRepository.findAllByCategory(category); }
     public List<Product> getAllProductByStatus(boolean status){ return productRepository.findAllByStatus(status);}
 
     public void addProduct(Product product){

@@ -61,7 +61,7 @@
                                     <section layout:fragment="content" class="container mt-5">
                                         <h1>Create Product</h1>
                                         <div class="form-group">
-                                            <form th:action="@{/products/add}" th:object="${product}" method="post">
+                                            <form th:action="@{/products/add}" th:object="${product}" method="post" enctype="multipart/form-data">
                                                 <div class="mb-3">
                                                     <label for="Id" class="form-label">Product Id:</label>
                                                     <input type="text" id="Id" th:field="*{Id}" class="form-control"/>
@@ -75,10 +75,8 @@
                                                          th:errors="*{Name}"></div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="Image" class="form-label">Product Image:</label>
-                                                    <input type="file" id="Image" th:field="*{Image}" class="form-control"/>
-                                                    <div class="text-danger" th:if="${#fields.hasErrors('Image')}"
-                                                         th:errors="*{Image}"></div>
+                                                    <label for="fileImage" class="form-label">Product Image:</label>
+                                                    <input type="file" id="fileImage" name="fileImage" class="form-control"/>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="Decription" class="form-label">Product Decription:</label>

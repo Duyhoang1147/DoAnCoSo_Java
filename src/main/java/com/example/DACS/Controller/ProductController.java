@@ -3,6 +3,7 @@ package com.example.DACS.Controller;
 import com.example.DACS.Model.Product;
 import com.example.DACS.Model.Supplier;
 import com.example.DACS.Service.CategoryService;
+import com.example.DACS.Service.ImagesService;
 import com.example.DACS.Service.ProductService;
 import com.example.DACS.Service.SupplierSerVice;
 import jakarta.validation.Valid;
@@ -11,12 +12,10 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -31,6 +30,9 @@ public class ProductController {
 
     @Autowired
     SupplierSerVice supplierSerVice;
+
+    @Autowired
+    ImagesService imagesService;
 
     @GetMapping
     public String showForm(Model model)
@@ -49,15 +51,39 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@Valid Product product, BindingResult error, Model model)
+    public String addProduct(@Valid Product product,
+                             MultipartFile fileImage,
+                             BindingResult error,
+                             Model model)
     {
-        if(error.hasErrors())
-        {
+        try {
+            if(error.hasErrors()){
+                throw new IOException("Fail");
+            }
+            product.setImage(imagesService.saveImage(fileImage));
+        }
+        catch (IOException e){
             model.addAttribute("product", product);
             return "product/add_product";
         }
-        product.setImage("/Images/" + product.getImage());
         productService.addProduct(product);
+        return "redirect:/products";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable("id") String id,
+                                Model model) {
+        try {
+            // Tìm sản phẩm theo id
+            Product product = productService.findProductById(id).get();
+
+            // Xóa ảnh kèm theo sản phẩm
+            imagesService.deleteImage(product.getImage());
+
+            // Xóa sản phẩm
+            productService.deleteProduct(id);
+        } catch (Exception e) {
+            return "product/index_product";
+        }
         return "redirect:/products";
     }
 }

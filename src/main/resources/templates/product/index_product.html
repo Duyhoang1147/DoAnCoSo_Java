@@ -63,7 +63,7 @@
                         </thead>
                         <tr th:each="product : ${product}">
                             <td th:text="${product.Name}"></td>
-                            <td><img th:src="${product.Image}"></td>
+                            <td><img th:src="${product.Image}" style="max-width: 180px; max-height: 180px"></td>
                             <td th:text="${product.Decription}"></td>
                             <td th:text="${product.Price}"></td>
                             <td th:text="${product.Quantity}"></td>

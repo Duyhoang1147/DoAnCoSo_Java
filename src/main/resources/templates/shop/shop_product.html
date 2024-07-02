@@ -51,7 +51,7 @@
                                     <div class="caption cntr">
                                         <p th:text="${product.Name}"></p>
                                         <p th:text="${product.Price}"><strong></strong></p>
-                                        <form>
+                                        <form th:action="@{/cart/add}" method="post">
                                             <input type="number" name="quantity" min="1" value="1" class="formcontrol d-inline-block" style="width: 70px;">
                                             <input type="hidden" th:value="${product.Id}" name="productId"/>
                                             <button type="submit" class="shopBtn">Add to Cart</button>

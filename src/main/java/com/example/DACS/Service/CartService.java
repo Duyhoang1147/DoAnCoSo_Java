@@ -51,7 +51,7 @@ public class CartService {
         double Total = 0;
         for (Cart cart : cartItem)
         {
-            Total += cart.getProduct().getPrice();
+            Total += cart.getProduct().getPrice() * cart.getQuantity();
         }
         return Total;
     }

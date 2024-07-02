@@ -28,7 +28,6 @@
                 <li class="active">Check Out</li>
             </ul>
             <div class="well well-small">
-                <h1>Check Out <small class="pull-right"> 2 Items are in the cart </small></h1>
                 <hr class="soften"/>
 
                 <table class="table table-bordered table-condensed">
@@ -38,17 +37,21 @@
                         <th>Description</th>
                         <th>Unit price</th>
                         <th>Qty </th>
+                        <th>Action</th>
                         <th>Total</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="cart : ${cart}">
-                        <td><img width="100" th:src="${cart.product.Image}}" alt=""></td>
+                        <td><img width="100" th:src="${cart.product.Image}" alt=""></td>
                         <td th:text="${cart.product.Name}"><br th:text="${cart.product.Decription}"></td>
                         <td th:text="${cart.product.Price}"></td>
                         <td>
-                            <input class="span1" style="max-width:34px" name="quantity" min="1" placeholder="1" id="appendedInputButtons" size="16" type="number" value="1">
+                            <input class="span1" style="max-width:34px" name="quantity" min="1" placeholder="1" id="appendedInputButtons" size="16" type="number" th:value="${cart.Quantity}">
                             <input type="hidden" th:value="${cart.product.Id}" name="productId"/>
+                        </td>
+                        <td>
+                            <a th:href="@{/cart/remove/{productId}(productId=${cart.product.Id})}" class="btn btndanger btn-sm">Remove</a>
                         </td>
                         <td th:text="${cart.product.Price * cart.Quantity}"></td>
                     </tr>
@@ -58,7 +61,8 @@
                     </tr>
                     </tbody>
                 </table><br/>
-                <a href="products.html" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+                <a href="/shop/product" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+                <a th:href="@{/cart/clear}" class="shopBtn btn-large">clear </a>
                 <a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
             </div>
         </div>

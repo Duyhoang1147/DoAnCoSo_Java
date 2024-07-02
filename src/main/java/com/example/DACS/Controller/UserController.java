@@ -117,7 +117,7 @@ public class UserController {
         user.setStatus(true);
         userService.save(user); // Lưu người dùng vào cơ sở dữ liệu
         userService.setDefaultRole(user.getUsername()); // Gán vai trò mặc định cho người dùng
-        return "redirect:/login"; // Chuyển hướng người dùng tới trang "login"
+        return "redirect:/users/login"; // Chuyển hướng người dùng tới trang "login"
     }
 }
 

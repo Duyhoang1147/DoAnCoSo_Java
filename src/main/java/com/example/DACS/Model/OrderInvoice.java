@@ -26,11 +26,6 @@ public class OrderInvoice {
     @JoinColumn(name = "user_id")
     public User user;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "OrderInvoice_Product",
-            joinColumns = @JoinColumn(name = "orderinvoice_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    List<Product> product;
+    @OneToMany(mappedBy = "orderInvoice")
+    private List<OrderDetail> orderDetails;
 }

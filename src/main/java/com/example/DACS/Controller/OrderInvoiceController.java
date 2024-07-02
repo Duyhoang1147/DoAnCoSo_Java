@@ -36,7 +36,6 @@ public class OrderInvoiceController {
         OrderInvoice orderInvoice = new OrderInvoice();
         model.addAttribute("orderInvoice", orderInvoice);
         model.addAttribute("users", userService.getAllUser());
-        model.addAttribute("products", productService.getAllProduct());
         return "orderinvoices/add_orderinvoice";
     }
 
@@ -47,7 +46,6 @@ public class OrderInvoiceController {
         if (result.hasErrors()) {
             model.addAttribute("orderInvoice", orderInvoice);
             model.addAttribute("users", userService.getAllUser());
-            model.addAttribute("products", productService.getAllProduct());
             return "orderinvoices/add_orderinvoice";
         }
         orderInvoiceService.addOrderInvoice(orderInvoice);
@@ -63,7 +61,6 @@ public class OrderInvoiceController {
         }
         model.addAttribute("orderInvoice", orderInvoice);
         model.addAttribute("users", userService.getAllUser());
-        model.addAttribute("products", productService.getAllProduct());
         return "orderinvoices/edit_orderinvoice";
     }
 
@@ -75,7 +72,6 @@ public class OrderInvoiceController {
         if (result.hasErrors()) {
             model.addAttribute("orderInvoice", orderInvoice);
             model.addAttribute("users", userService.getAllUser());
-            model.addAttribute("products", productService.getAllProduct());
             return "orderinvoices/edit_orderinvoice";
         }
         orderInvoice.setId(orderId);

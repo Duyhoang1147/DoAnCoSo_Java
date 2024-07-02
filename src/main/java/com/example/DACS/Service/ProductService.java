@@ -28,6 +28,7 @@ public class ProductService {
     public List<Product> getAllProductByStatus(boolean status){ return productRepository.findAllByStatus(status);}
 
     public void addProduct(Product product){
+        product.getSupplier().forEach(supplier -> supplier.getProduct().add(product));
         productRepository.save(product);
     }
 

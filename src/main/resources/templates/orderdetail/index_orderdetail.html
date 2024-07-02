@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Invoices List</title>
+    <title>Order Details List</title>
     <link rel="stylesheet" th:href='@{static/assets/css/bootstrap.min.css}' />
     <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
     <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
@@ -28,7 +28,7 @@
         <div class="card" style="padding-top: 25px">
             <div class="card-header">
                 <div class="d-flex align-items-center">
-                    <a class="btn btn-primary btn-round ms-auto" th:href="@{/orderinvoices/add}">Add Order Invoice</a>
+                    <a class="btn btn-primary btn-round ms-auto" th:href="@{/orderdetails/add}">Add Order Detail</a>
                 </div>
             </div>
             <div class="card-body">
@@ -37,22 +37,24 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Create Date</th>
-                            <th>User</th>
+                            <th>Quantity</th>
+                            <th>Product</th>
+                            <th>Order Invoice</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="orderInvoice : ${orderInvoices}">
-                            <td th:text="${orderInvoice.id}"></td>
-                            <td th:text="${orderInvoice.create}"></td>
-                            <td th:text="${orderInvoice.user.username}"></td>
+                        <tr th:each="orderDetail : ${orderDetails}">
+                            <td th:text="${orderDetail.id}"></td>
+                            <td th:text="${orderDetail.quantity}"></td>
+                            <td th:text="${orderDetail.product.name}"></td>
+                            <td th:text="${orderDetail.orderInvoice.id}"></td>
                             <td>
                                 <div class="form-button-action">
-                                    <a th:href="@{/orderinvoices/edit/{orderId}(orderId=${orderInvoice.id})}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a th:href="@{/orderdetails/edit/{orderDetailId}(orderDetailId=${orderDetail.id})}" class="btn btn-warning btn-sm">Edit</a>
                                 </div>
                                 <div class="form-button-action">
-                                    <a th:href="@{/orderinvoices/delete/{orderId}(orderId=${orderInvoice.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                    <a th:href="@{/orderdetails/delete/{orderDetailId}(orderDetailId=${orderDetail.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                                 </div>
                             </td>
                         </tr>

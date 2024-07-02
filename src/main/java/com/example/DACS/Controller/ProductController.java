@@ -44,7 +44,7 @@ public class ProductController {
     {
         model.addAttribute("product", new Product());
         model.addAttribute("category", categoryService.getAllCategories());
-        model.addAttribute("supplier", supplierSerVice.getAllSupplier());
+        model.addAttribute("suppliers", supplierSerVice.getAllSupplier());
         return "product/add_product";
     }
 

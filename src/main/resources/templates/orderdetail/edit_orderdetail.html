@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Order Invoice</title>
+    <title>Edit Order Detail</title>
     <link rel="stylesheet" th:href='@{static/assets/css/bootstrap.min.css}' />
     <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
     <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
@@ -24,20 +24,27 @@
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
-    <h1>Edit Order Invoice</h1>
+    <h1>Edit Order Detail</h1>
     <div class="form-group">
-        <form th:action="@{/orderinvoices/edit/{orderId}(orderId=${orderInvoice.id})}" th:object="${orderInvoice}" method="post">
+        <form th:action="@{/orderdetails/edit/{orderDetailId}(orderDetailId=${orderDetail.id})}" th:object="${orderDetail}" method="post">
             <div class="mb-3">
-                <label for="createDate" class="form-label">Create Date:</label>
-                <input type="date" id="createDate" th:field="*{create}" class="form-control"/>
-                <div class="text-danger" th:if="${#fields.hasErrors('create')}" th:errors="*{create}"></div>
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" id="quantity" th:field="*{quantity}" class="form-control"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
             </div>
             <div class="mb-3">
-                <label for="user" class="form-label">User:</label>
-                <select id="user" th:field="*{user}" class="form-control">
-                    <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.username}"></option>
+                <label for="product" class="form-label">Product:</label>
+                <select id="product" th:field="*{product}" class="form-control">
+                    <option th:each="p : ${products}" th:value="${p.id}" th:text="${p.name}"></option>
                 </select>
-                <div class="text-danger" th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('product')}" th:errors="*{product}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="orderInvoice" class="form-label">Order Invoice:</label>
+                <select id="orderInvoice" th:field="*{orderInvoice}" class="form-control">
+                    <option th:each="oi : ${orderInvoices}" th:value="${oi.id}" th:text="${oi.id}"></option>
+                </select>
+                <div class="text-danger" th:if="${#fields.hasErrors('orderInvoice')}" th:errors="*{orderInvoice}"></div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

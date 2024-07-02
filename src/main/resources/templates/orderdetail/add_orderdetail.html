@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Order Detail</title>
+    <link rel="stylesheet" th:href='@{static/assets/css/bootstrap.min.css}' />
+    <link rel="stylesheet" th:href='@{/assets/css/plugins.min.css}'/>
+    <link rel="stylesheet" th:href='@{/assets/css/kaiadmin.min.css}'/>
+    <link rel="stylesheet" th:href='@{/assets/css/demo.css}' />
+    <script src='@{/assets/js/plugin/webfont/webfont.min.js}'></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: ["Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+                urls: ["../assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <h1>Add Order Detail</h1>
+    <div class="form-group">
+        <form th:action="@{/orderdetails/add}" th:object="${orderDetail}" method="post">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id:</label>
+                <input type="text" id="id" th:field="*{id}" class="form-control"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" id="quantity" th:field="*{quantity}" class="form-control"/>
+                <div class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="product" class="form-label">Product:</label>
+                <select id="product" th:field="*{product}" class="form-control">
+                    <option th:each="p : ${products}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+                <div class="text-danger" th:if="${#fields.hasErrors('product')}" th:errors="*{product}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="orderInvoice" class="form-label">Order Invoice:</label>
+                <select id="orderInvoice" th:field="*{orderInvoice}" class="form-control">
+                    <option th:each="oi : ${orderInvoices}" th:value="${oi.id}" th:text="${oi.id}"></option>
+                </select>
+                <div class="text-danger" th:if="${#fields.hasErrors('orderInvoice')}" th:errors="*{orderInvoice}"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

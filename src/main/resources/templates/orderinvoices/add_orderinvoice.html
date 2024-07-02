@@ -45,15 +45,6 @@
                 </select>
                 <div class="text-danger" th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></div>
             </div>
-            <div class="mb-3">
-                <label>Select Products:</label>
-                <div th:each="p : ${products}">
-                    <div>
-                        <input type="checkbox" th:id="'product_' + ${p.id}" th:name="'product'" th:value="${p.id}"/>
-                        <label th:for="'product_' + ${p.id}" th:text="${p.name}"></label>
-                    </div>
-                </div>
-            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

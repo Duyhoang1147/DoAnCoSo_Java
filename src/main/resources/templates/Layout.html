@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:layout="">
+      xmlns:layout=""
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -196,7 +197,12 @@
         <!-- Navbar Header -->
         <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
           <div class="container-fluid">
-            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center" sec:authorize="!isAuthenticated()">
+              <form th:action="@{/users/login}" method="get">
+                <button class="btn btn-primary btn-round ms-auto">Login</button>
+              </form>
+            </ul>
+            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center" sec:authorize="isAuthenticated()">
               <li
                 class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
               >
@@ -237,7 +243,7 @@
                   </div>
                   <span class="profile-username">
                     <span class="op-7">Hi,</span>
-                    <span class="fw-bold">Hizrian</span>
+                    <span class="fw-bold" sec:authentication="name"></span>
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -251,7 +257,7 @@
                             class="avatar-img rounded"/>
                         </div>
                         <div class="u-text">
-                          <h4>Hizrian</h4>
+                          <h4 sec:authentication="name"></h4>
                           <p class="text-muted">hello@example.com</p>
                           <a
                             href=""
@@ -268,7 +274,9 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Account Setting</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Logout</a>
+                      <form th:action="@{/logout}" method="post">
+                        <button class="dropdown-item">Logout</button>
+                      </form>
                     </li>
                   </div>
                 </ul>

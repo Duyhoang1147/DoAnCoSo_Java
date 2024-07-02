@@ -36,28 +36,32 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(@NotNull HttpSecurity http) throws Exception {
-        return http
+        return http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/", "/oauth/**", "/register", "/error",
+                        .requestMatchers("/css/**", "/webjars/**", "/js/**", "/", "/oauth/**", "/register", "/error",
                                 "/products", "/cart", "/cart/**")
                         .permitAll() // Cho phép truy cập không cần xác thực.
-
                         .anyRequest()
-                        .permitAll()
+                        .permitAll() // Bất kỳ yêu cầu nào khác cần xác thực.
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login") // Trang chuyển hướng sau khi đăng xuất.
+                        .logoutSuccessUrl("/users/login") // Trang chuyển hướng sau khi đăng xuất.
                         .deleteCookies("JSESSIONID") // Xóa cookie.
                         .invalidateHttpSession(true) // Hủy phiên làm việc.
                         .clearAuthentication(true) // Xóa xác thực.
                         .permitAll()
                 )
-                .formLogin(Customizer.withDefaults()
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/users/login") // Trang đăng nhập.
+                        .loginProcessingUrl("/users/login") // URL xử lý đăng nhập.
+                        .defaultSuccessUrl("/products") // Trang sau đăng nhập thành công.
+                        .failureUrl("/login?error") // Trang đăng nhập thất bại.
+                        .permitAll()
                 )
                 .rememberMe(rememberMe -> rememberMe
-                        .key("hutech")
-                        .rememberMeCookieName("hutech")
+                        .key("DACS")
+                        .rememberMeCookieName("DACS")
                         .tokenValiditySeconds(24 * 60 * 60) // Thời gian nhớ đăng nhập.
                         .userDetailsService(userDetailsService())
                 )
@@ -66,13 +70,12 @@ public class SecurityConfig {
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .maximumSessions(1) // Giới hạn số phiên đăng nhập.
-                        .expiredUrl("/login") // Trang khi phiên hết hạn.
+                        .expiredUrl("/users/login") // Trang khi phiên hết hạn.
                 )
                 .httpBasic(httpBasic -> httpBasic
-                        .realmName("hutech") // Tên miền cho xác thực cơ bản.
+                        .realmName("DACS") // Tên miền cho xác thực cơ bản.
                 )
                 .build(); // Xây dựng và trả về chuỗi lọc bảo mật.
-
     }
 }
 

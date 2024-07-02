@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout=""
+      layout:decorate="~{layoutShop}">
+<head>
+    <meta charset="utf-8">
+    <title>Twitter Bootstrap shopping cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" th:href='@{/assetsShop/css/bootstrap.css}'/>
+    <link rel="stylesheet" th:href='@{/assetsShop/style.css}'/>
+    <link rel="stylesheet" th:href='@{/assetsShop/font-awesome/css/font-awesome.css}'/>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href='@{/assetsShop/ico/favicon.ico}'/>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <div class="row">
+        <div class="span12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="index.html">Home</a> <span class="divider">/</span>
+                </li>
+                <li class="active">Check Out</li>
+            </ul>
+            <div class="well well-small">
+                <h1>Check Out <small class="pull-right"> 2 Items are in the cart </small></h1>
+                <hr class="soften"/>
+
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Unit price</th>
+                        <th>Qty </th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cart : ${cart}">
+                        <td><img width="100" th:src="${cart.product.Image}}" alt=""></td>
+                        <td th:text="${cart.product.Name}"><br th:text="${cart.product.Decription}"></td>
+                        <td th:text="${cart.product.Price}"></td>
+                        <td>
+                            <input class="span1" style="max-width:34px" name="quantity" min="1" placeholder="1" id="appendedInputButtons" size="16" type="number" value="1">
+                            <input type="hidden" th:value="${cart.product.Id}" name="productId"/>
+                        </td>
+                        <td th:text="${cart.product.Price * cart.Quantity}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="alignR">Total products:	</td>
+                        <td th:text="${cartTotal}"></td>
+                    </tr>
+                    </tbody>
+                </table><br/>
+                <a href="products.html" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+                <a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

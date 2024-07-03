@@ -38,8 +38,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(@NotNull HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/webjars/**", "/js/**", "/", "/oauth/**", "/register", "/error",
-                                "/products", "/cart", "/cart/**")
+                        .requestMatchers("/users/login", "/resources/**")
                         .permitAll() // Cho phép truy cập không cần xác thực.
                         .anyRequest()
                         .authenticated() // Bất kỳ yêu cầu nào khác cần xác thực.
@@ -56,7 +55,6 @@ public class SecurityConfig {
                         .loginPage("/users/login") // Trang đăng nhập.
                         .loginProcessingUrl("/users/login") // URL xử lý đăng nhập.
                         .defaultSuccessUrl("/products") // Trang sau đăng nhập thành công.
-                        .failureUrl("/login?error") // Trang đăng nhập thất bại.
                         .permitAll()
                 )
                 .rememberMe(rememberMe -> rememberMe
